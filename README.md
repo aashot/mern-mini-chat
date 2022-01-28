@@ -17,6 +17,7 @@ For backend didn't have a really great reference, so my learning projects and Go
 - Detailed user profile
 - User blocking
 - Store images in cloud
+- Integrate graphql
 
 ### Known issues:
 - [ ] User profile image upload sometimes throws a server error:
