@@ -1,0 +1,47 @@
+import React, { useEffect } from 'react'
+import {SideMenu, Wrapper, MessagesMenu} from './Home.styled'
+import Dialogs from '../../components/Dialogs/Dialogs.container'
+import Messages from '../../components/Messages/Messages.container'
+import Search from '../../components/Search/Search.container'
+import ChatInput from '../../components/ChatInput/ChatInput.container'
+import Profile from '../../components/Profile/Profile.container'
+import Interlocutor from '../../components/Interlocutor/Interlocutor.container'
+import { fetchDialogs } from '../../redux/dialogs/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { DialogState } from '../../redux/dialogs/types'
+import FoundUsers from '../../components/FoundUsers/FoundUsers.container'
+import { UserState } from '../../redux/user/types'
+
+const Home = () => {
+    const foundUsers = useSelector( (state:{dialog:DialogState}) => state.dialog.usersfound)
+    const currentDialog = useSelector( (state:{dialog:DialogState}) => state.dialog.currentDialog)
+    const selectedUser = useSelector( (state:{dialog:DialogState}) => state.dialog.selectedUser)
+    const user = useSelector( (state:{user:UserState}) => state.user.data)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchDialogs())
+    }, [dispatch])
+
+    if(!user){
+        return <></>
+    }
+    return(
+        <Wrapper>
+            <SideMenu isSelect={!!(currentDialog || selectedUser)}>
+                <Profile />
+                <Search />
+                {foundUsers  ? <FoundUsers /> : <Dialogs />}
+            </SideMenu>
+
+            <MessagesMenu isSelect={!!(currentDialog || selectedUser)}>
+                <Interlocutor />
+                <Messages />
+                <ChatInput />
+            </MessagesMenu>
+        </Wrapper>
+    )
+}
+
+export default Home
