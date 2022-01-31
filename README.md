@@ -23,7 +23,7 @@ For backend didn't have a really great reference, so my learning projects and Go
 - [ ] User profile image upload sometimes throws a server error:
 - [ ] Small UI and UX issues
 - [ ] Auto scroll to the bottom of the chat when opening the chat
-- [ ] User searing can be improved with throttling or debouncing functions
+- [ ] User searching can be improved with throttling or debouncing functions
 
 ### Frontend stack:
 
